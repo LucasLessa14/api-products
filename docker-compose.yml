@@ -1,5 +1,13 @@
 version: '3.1'
 services:
+  api-products:
+    container_name: api-products
+    restart: always
+    build: ./src
+    ports: 
+        - '3003:3003'
+    depends_on: 
+        - db-products
   db-products:
     image: mongo:4.4.0-bionic
     container_name: db-products
