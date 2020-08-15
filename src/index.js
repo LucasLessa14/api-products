@@ -10,6 +10,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+require('./controllers/controllers')(app);
+
 app.get('/', (req,res) => res.send('OK!'));
 
 app.listen(port, () => 
