@@ -7,7 +7,7 @@ This RESTful API with NodeJS and MongoDB quick-start facilitate the development 
 
 # Quick-start
 
-``` docker
+```docker
 # Upload the application
 docker-compose up
 
