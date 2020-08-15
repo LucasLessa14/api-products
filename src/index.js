@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 
 app.get('/', (req,res) => res.send('OK!'));
 
+require('./controllers/authController')(app);
+
 app.listen(port, () => 
     console.log(`API is running on port ${ port }.`)
 );
