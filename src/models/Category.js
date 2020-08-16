@@ -7,6 +7,10 @@ const CategorySchema = new mongoose.Schema({
         lowercase: true,
         unique: true
     },
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }],
     createdAt: {
         type: Date,
         default: Date.now

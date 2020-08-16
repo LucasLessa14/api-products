@@ -2,6 +2,7 @@ const express = require('express');
 const authMiddleware = require('../middlewares/auth');
 
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().populate([ 'category' ]);
 
         return res.send({ products });
 
@@ -31,9 +32,11 @@ router.get('/:productId', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { name, price, amount } = req.body;
+        const { name, price, amount, category } = req.body;
+
+        console.log(category);
         
-        const product = await Product.create({ name, price, amount });
+        const product = await Product.create({ name, price, amount, category });
 
         return res.send({ product });
     } catch (err) {
@@ -44,12 +47,13 @@ router.post('/', async (req, res) => {
 
 router.put('/:productId', async (req, res) => {
     try {
-        const { name, price, amount } = req.body;
+        const { name, price, amount, category } = req.body;
         
         const product = await Product.findByIdAndUpdate(req.params.productId, { 
             name, 
             price,
-            amount
+            amount,
+            category
         }, { new: true });
 
         return res.send({ product });
